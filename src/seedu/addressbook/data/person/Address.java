@@ -10,8 +10,12 @@ import java.io.*;
 public class Address {
 
     public static final String EXAMPLE = "123, some street, #11-11, 123456";
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses must be in this format: Block, Street, Unit, Postal Code";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
+    public static final int BLOCK_NUMBER = 0;
+    public static final int STREET_NAME = 1;
+    public static final int UNIT_NUMBER = 2;
+    public static final int POSTAL_CODE = 3;
 
     private final Block blockNumber;
     private final Street streetName;
@@ -31,12 +35,11 @@ public class Address {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
 
-        String[] trimmedAddressParts = new String[4];
-        trimmedAddressParts = trimmedAddress.split(", ");
-        blockNumber = new Block(trimmedAddressParts[0].replace("a/", "")); //Remove the '/a' from block number
-        streetName = new Street(trimmedAddressParts[1]);
-        unitNumber = new Unit(trimmedAddressParts[2]);
-        postalCode = new PostalCode(trimmedAddressParts[3]);
+        String[] trimmedAddressParts = trimmedAddress.split(", ");
+        blockNumber = new Block(trimmedAddressParts[BLOCK_NUMBER].replace("a/", "")); //Remove the '/a' from block number
+        streetName = new Street(trimmedAddressParts[STREET_NAME]);
+        unitNumber = new Unit(trimmedAddressParts[UNIT_NUMBER]);
+        postalCode = new PostalCode(trimmedAddressParts[POSTAL_CODE]);
 
     }
 
