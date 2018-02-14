@@ -2,6 +2,10 @@ package seedu.addressbook.ui;
 
 import java.util.*;
 
+/**
+ * Formatter for text UI
+ */
+
 public class Formatter {
 
     /** A decorative prefix added to the beginning of lines printed by AddressBook */
